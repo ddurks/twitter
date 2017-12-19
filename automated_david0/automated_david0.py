@@ -1,4 +1,4 @@
-import tweepy, random, sys
+import tweepy, random, sys, re
 from datetime import datetime
 from threading import Timer
 from credentials import *
@@ -12,6 +12,7 @@ def connect():
 
 def generate_markov(text):
     chain = {}
+    
     words = text.split(' ')
     index = 1
     for word in words[index:]:
@@ -25,7 +26,8 @@ def generate_markov(text):
     return chain
 
 def generate_message(chain):
-    count = 15
+    count = 100
+
     word1 = random.choice(list(chain.keys()))
     message = word1.capitalize()
 
@@ -41,15 +43,19 @@ def tweet_message():
     
     with open('online__davids_tweets.txt', 'r') as myfile:
         data=myfile.read()
-    data_ = None 
-    data = re.sub(
-           r"^.*(@.* ).*$", 
-           "", 
-           data_
-       )
     
-    print(generate_message(generate_markov(data_)))
-    #twitter.update_status(status=generate_message(generate_markov(data)))
+    while(True):
+        try:
+            markov = generate_markov(data)
+            msg = generate_message(markov)
+            while "@" in msg:
+                msg = generate_message(markov)
+            print(msg)
+            twitter.update_status(status=generate_message(generate_markov(data)))
+            break
+        except tweepy.error.TweepError as e:
+            print(e)
+            continue
 
 if __name__ == '__main__':
     
