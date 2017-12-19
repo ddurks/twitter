@@ -51,7 +51,7 @@ def tweet_message():
             while "@" in msg:
                 msg = generate_message(markov)
             print(msg)
-            twitter.update_status(status=generate_message(generate_markov(data)))
+            twitter.update_status(status=msg)
             break
         except tweepy.error.TweepError as e:
             print(e)
