@@ -26,7 +26,7 @@ def generate_markov(text):
     return chain
 
 def generate_message(chain):
-    count = 100
+    count = 15
 
     word1 = random.choice(list(chain.keys()))
     message = word1.capitalize()
