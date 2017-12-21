@@ -33,10 +33,6 @@ def update_tweets(screen_name):
             outtweets = outtweets + " " + str(tweet.text)
             tweetids = tweetids + "\n" + str(tweet.id)
     
-    print(outtweets)
-    print('=====')
-    print(tweetids)
-    
     with open(screen_name+'s_tweets.txt', 'a') as f:
         f.write(outtweets)
         
