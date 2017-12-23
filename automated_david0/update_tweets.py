@@ -29,8 +29,8 @@ def update_tweets(screen_name):
     tweetids = ""
 
     for tweet in alltweets:
-        if str(tweet.id) not in tweetidset and "@automated__david:" not in str(tweet.text):
-            outtweets = outtweets + " " + str(tweet.text)
+        if str(tweet.id) not in tweetidset and "@automated__david:" not in str(tweet.text.encode('utf8')):
+            outtweets = outtweets + " " + str(tweet.text.encode('utf8'))
             tweetids = tweetids + "\n" + str(tweet.id)
     
     with open(screen_name+'s_tweets.txt', 'a') as f:

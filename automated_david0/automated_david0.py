@@ -26,7 +26,7 @@ def generate_markov(text):
     return chain
 
 def generate_message(chain):
-    count = 15
+    count = 20
 
     word1 = random.choice(list(chain.keys()))
     message = word1.capitalize()
@@ -60,15 +60,3 @@ def tweet_message():
 if __name__ == '__main__':
     
     tweet_message()
-    
-    '''
-
-    x=datetime.today()
-    y=x.replace(day=x.day+1, hour=1, minute=0, second=0, microsecond=0)
-    delta_t=y-x
-
-    secs=delta_t.seconds+1
-    
-    t = Timer(secs, tweet_message)
-    t.start()
-    '''
